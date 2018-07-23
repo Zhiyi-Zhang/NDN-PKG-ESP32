@@ -23,12 +23,10 @@ BootstrapClient::BootstrapClient(Face& face, NameLite& host,
     //TODO: we should add something here
 }
 
-void
-BootstrapClient::loop()
+bool
+BootstrapClient::begin()
 {
-    //TODO: we should add timeout here
-    this->BootstrapRequest();
-  
+    this->BootstrapRequest(); 
 }
 
 bool
@@ -149,7 +147,10 @@ BootstrapClient::BootstrapRequest()
 
     if (m_evtCb != nullptr) {
       m_evtCb(m_evtCbArg, Event::BOOTSTRAP_REQUEST);
-  }
+    }
+  
+    m_face.onData(&processBootstrapResponse, nullptr);
+    m_face.onNack(&processNack, nullptr);
 }
 
 bool
@@ -202,6 +203,10 @@ BootstrapClient::CertificateRequest()
 
     if (m_evtCb != nullptr) {
       m_evtCb(m_evtCbArg, Event::BOOTSTRAP_REQUEST);
+    }
+    
+    m_face.onData(&processCeritificateResponse, nullptr);
+    m_face.onNack(&processNack, nullptr);
 }
 
 } // namespace ndn

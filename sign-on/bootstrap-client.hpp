@@ -13,10 +13,9 @@ public:
 
   BootstrapClient(Face& face, int bootstrapInterval, int bootstrapTimeout = -1);
 
-  /** \brief loop the client
-   */
-  void
-  loop();
+
+  bool
+  begin();
 
 
   bool
@@ -62,10 +61,6 @@ public:
     m_evtCb = cb;
     m_evtCbArg = cbarg;
   }
-
-private:
-  
-  void setDefaultCertificate();
 
 
 private:
