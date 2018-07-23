@@ -67,27 +67,21 @@ private:
   
   void setDefaultCertificate();
 
-  void setCertificate();
-
-  void setAchorCertificate();
-
-  void setAnchorPubKey(const uint8_t* keybits);
 
 private:
   Face& m_face;
-  const int m_bootstrapInterval;
-  const int m_bootstrapTimeout;
   unsigned long m_lastProbe; ///< timestamp of last probe
   bool m_isPending; ///< whether lastProbe is waiting for either response or timeout
   EventCallback m_evtCb;
   void* m_evtCbArg;
-  
-  
-  
-  DataLite m_anchorCertificate;
-  DataLite m_Certificate;
+
+  NameLite m_host;
+  NameLite m_home_prefix;
+  BlobLite m_anchorCertificate;
+  BlobLite m_Certificate;
   EcPrivateKey m_bopvt;
   EcPublicKey m_bopub;
+  BlobLite* m_token;
   EcPrivateKey* m_ckpvt;
   EcPublicKey* m_ckpub;
   EcPublicKey* m_anchorpub;
@@ -96,4 +90,4 @@ private:
 
 } // namespace ndn
 
-#endif // ESP8266NDN_PING_CLIENT_HPP
+#endif // ESP8266NDN_BOOTSTRAP_CLIENT_HPP
