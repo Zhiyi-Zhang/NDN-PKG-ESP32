@@ -49,6 +49,10 @@ setup()
   pinMode(LED0, OUTPUT);
 
   g_client0.onEvent(&ndnbootstrapEvent, reinterpret_cast<void*>(LED0));
+   
+  if(g_client0.begin()){
+    Serial.print("Bootstrap Success");
+  }
 
 }
 
@@ -56,9 +60,6 @@ void
 loop()
 {
   g_face.loop();
-  if(g_client0.begin()){
-    Serial.print("Bootstrap Success");
-  }
   delay(10);
 }
 
